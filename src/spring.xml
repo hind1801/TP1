@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id = "iDao" class="dao.IDao" abstract="true"/>
+    <bean id="sdao" class="dao.DsVolatile.StudentDao">
+    </bean>
+    <bean id="gdao" class="dao.DsVolatile.GroupDao">
+    </bean>
+    <bean id="gmetier" class="metier.GroupeMetier">
+        <property name="dao" ref="gdao" />
+    </bean>
+    <bean id="smetier" class="metier.StudentMetier">
+        <property name="dao" ref="sdao" />
+    </bean>
+
+    <bean id="scontroller" class="presentation.StudentController">
+        <property name="metier" ref="smetier" />
+    </bean>
+
+    <bean id="gcontroller" class="presentation.GroupeController">
+        <property name="metier" ref="gmetier" />
+    </bean>
+
+</beans>
